@@ -14,9 +14,13 @@ protocol SearchManagerDelegate {
 struct SearchManager  {
     var delegate : SearchManagerDelegate?
     func makeSearch(name: String){
-        let urlString = "https://itunes.apple.com/search?term=\(name)&entity=album"
-        performRequest(with: urlString)
-        print(urlString)
+        if let data = name.data(using: .utf8){
+            let encoded = data.map { String(format: "%%%02hhX", $0) }.joined()
+            let urlString = "https://itunes.apple.com/search?term=\(encoded)&entity=album"
+            performRequest(with: urlString)
+            print(urlString)
+        }
+        
     }
     func performRequest(with urlString: String){
         // create url

@@ -17,11 +17,9 @@ class TabBarController: UITabBarController {
     
     private func setMenuViewControllers() {
         let searchController = SearchController()
-        //searchController.router = router
         searchController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag:  0)
 
         let historyController = HistoryControllerViewController()
-        //favouriteController.router = router
         historyController.tabBarItem = UITabBarItem(title: "History", image: UIImage(systemName: "archivebox"), tag:  1)
     
         let tabBarList = [searchController, historyController]

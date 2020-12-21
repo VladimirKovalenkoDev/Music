@@ -12,17 +12,20 @@ class SearchListCell: UICollectionViewCell {
     let albumImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .cyan
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleToFill
+        //imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     let albumName: UILabel = {
         let label = UILabel()
         label.text = "Album Name"
+        label.font = UIFont(name: "System", size: 13)
         return label
     }()
     let artistName: UILabel = {
         let label = UILabel()
         label.text = "Artist Name"
+        label.textColor = .lightGray
         return label
     }()
     override init(frame: CGRect) {
@@ -36,13 +39,27 @@ class SearchListCell: UICollectionViewCell {
 
     func setCell() {
         addSubview(albumImage)
-        layer.borderWidth = 0
+        addSubview(albumName)
+        addSubview(artistName)
 
         albumImage.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-30)
+        }
+        albumName.snp.makeConstraints { (make) in
+            make.top.equalTo(albumImage.snp.bottom)
+            make.bottom.equalToSuperview().offset(-15)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+        artistName.snp.makeConstraints { (make) in
+            make.top.equalTo(albumName.snp.bottom)
+            make.height.equalTo(10)
             make.bottom.equalToSuperview()
+            make.right.equalToSuperview()
+            make.left.equalToSuperview()
         }
     }
 }
