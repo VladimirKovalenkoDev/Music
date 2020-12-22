@@ -7,15 +7,19 @@
 
 import UIKit
 import SnapKit
+import CoreData
 class SearchController: UIViewController {
-var searchManager = SearchManager()
+    var searchManager = SearchManager()
     var results = [SearchItems]()
+    var history = [History]()
+    let context  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var collectionView: UICollectionView!
     var frame = CGRect()
     var displayWidth = CGFloat()
     var displayHeight = CGFloat()
     var layout = UICollectionViewFlowLayout()
     var navBar = UINavigationBar()
+    
     lazy var searchBar : UISearchBar = {
         let bar = UISearchBar()
         bar.placeholder = "Search Artist"
@@ -24,10 +28,6 @@ var searchManager = SearchManager()
         bar.sizeToFit()
         return bar
     }()
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.searchManager.makeSearch(name: "Anacondaz")
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         searchManager.delegate = self
@@ -35,6 +35,7 @@ var searchManager = SearchManager()
         setUpSearchBar()
         collectionView.keyboardDismissMode = .onDrag
         view.backgroundColor = .white
+        
     }
     func configureCollectionView() {
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
@@ -95,15 +96,12 @@ extension SearchController: UICollectionViewDelegate,
         let artworkSting100 = results[indexPath.row].artworkUrl100
         let artworkSting600 = artworkSting100.replacingOccurrences(of: "100x100", with: "600x600")
         if let imageURL = URL(string: artworkSting600) {
-        //cell.spinner.startAnimating()
             DispatchQueue.global(qos: .userInitiated).async {
                 let contextOfUrl = try? Data(contentsOf: imageURL)
                 DispatchQueue.main.async {
                     if let imageData = contextOfUrl{
                         cell.albumImage.image = UIImage(data: imageData)
                     }
-//                    cell.spinner.stopAnimating()
-//                    cell.spinner.hidesWhenStopped = true
                 }
             }
 }
@@ -115,17 +113,35 @@ extension SearchController: UICollectionViewDelegate,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 180, height: 180)
     }
-  
-//    private func collectionView(collectionView: UICollectionView,
-//                                layout collectionViewLayout: UICollectionViewLayout,
-//                                insetForSectionAtIndex section: Int) -> UIEdgeInsets  {
-//        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+//        let vc = HistoryController()
+//        vc.modalTransitionStyle = .crossDissolve
+//        vc.modalPresentationStyle = .formSheet
+//        present(vc, animated: true)
+    }
+
 
 }
 extension SearchController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchManager.makeSearch(name: searchBar.text!)
-        self.searchBar.endEditing(true)
+        searchBar.endEditing(true)
+        let newName = History(context: self.context)
+        newName.name = searchBar.text!
+        history.append(newName)
+        saveData()
       }
+}
+
+extension SearchController {
+    func saveData(){
+        if context.hasChanges {
+            do {
+                try context.save()
+                } catch {
+                    print("error saving context: \(error)")
+            }
+        }
+    }
 }

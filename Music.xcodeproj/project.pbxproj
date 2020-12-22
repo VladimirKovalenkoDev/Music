@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		044A676B1DC7D444C74CB45F /* Pods_Music.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3157439674C642F281D9E478 /* Pods_Music.framework */; };
 		DD50FBF32590B693006FFD55 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50FBF22590B693006FFD55 /* TabBarController.swift */; };
-		DD50FBF72590B7B7006FFD55 /* HistoryControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50FBF62590B7B7006FFD55 /* HistoryControllerViewController.swift */; };
+		DD50FBF72590B7B7006FFD55 /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50FBF62590B7B7006FFD55 /* HistoryController.swift */; };
 		DD50FBFA2590BD8B006FFD55 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50FBF92590BD8B006FFD55 /* SearchListCell.swift */; };
+		DD50FC0D259234C0006FFD55 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50FC0C259234C0006FFD55 /* HistoryCell.swift */; };
 		DDB286BD258F778000358410 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB286BC258F778000358410 /* AppDelegate.swift */; };
 		DDB286BF258F778000358410 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB286BE258F778000358410 /* SceneDelegate.swift */; };
 		DDB286C1258F778000358410 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB286C0258F778000358410 /* SearchController.swift */; };
@@ -26,8 +27,9 @@
 		3157439674C642F281D9E478 /* Pods_Music.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Music.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA232D72AA8A0198AE9F1B4 /* Pods-Music.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Music.release.xcconfig"; path = "Target Support Files/Pods-Music/Pods-Music.release.xcconfig"; sourceTree = "<group>"; };
 		DD50FBF22590B693006FFD55 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		DD50FBF62590B7B7006FFD55 /* HistoryControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryControllerViewController.swift; sourceTree = "<group>"; };
+		DD50FBF62590B7B7006FFD55 /* HistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
 		DD50FBF92590BD8B006FFD55 /* SearchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
+		DD50FC0C259234C0006FFD55 /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		DDB286B9258F778000358410 /* Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Music.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDB286BC258F778000358410 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDB286BE258F778000358410 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,7 +113,8 @@
 				DDB286C0258F778000358410 /* SearchController.swift */,
 				DD50FBF92590BD8B006FFD55 /* SearchListCell.swift */,
 				DD50FBF22590B693006FFD55 /* TabBarController.swift */,
-				DD50FBF62590B7B7006FFD55 /* HistoryControllerViewController.swift */,
+				DD50FBF62590B7B7006FFD55 /* HistoryController.swift */,
+				DD50FC0C259234C0006FFD55 /* HistoryCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -251,9 +254,10 @@
 				DD50FBFA2590BD8B006FFD55 /* SearchListCell.swift in Sources */,
 				DDB286DF258F7F5000358410 /* SearchItems.swift in Sources */,
 				DDB286BD258F778000358410 /* AppDelegate.swift in Sources */,
+				DD50FC0D259234C0006FFD55 /* HistoryCell.swift in Sources */,
 				DDB286BF258F778000358410 /* SceneDelegate.swift in Sources */,
 				DD50FBF32590B693006FFD55 /* TabBarController.swift in Sources */,
-				DD50FBF72590B7B7006FFD55 /* HistoryControllerViewController.swift in Sources */,
+				DD50FBF72590B7B7006FFD55 /* HistoryController.swift in Sources */,
 				DDB286EA258F86B300358410 /* Request.swift in Sources */,
 				DDB286C7258F778000358410 /* Music.xcdatamodeld in Sources */,
 			);

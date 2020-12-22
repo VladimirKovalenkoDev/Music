@@ -19,7 +19,7 @@ class TabBarController: UITabBarController {
         let searchController = SearchController()
         searchController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag:  0)
 
-        let historyController = HistoryControllerViewController()
+        let historyController = HistoryController()
         historyController.tabBarItem = UITabBarItem(title: "History", image: UIImage(systemName: "archivebox"), tag:  1)
     
         let tabBarList = [searchController, historyController]
