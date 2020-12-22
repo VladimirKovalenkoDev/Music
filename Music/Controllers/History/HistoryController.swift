@@ -44,6 +44,24 @@ extension HistoryController: UITableViewDataSource, UITableViewDelegate{
         cell.textLabel?.text = story[indexPath.row].name
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = AlbumsFromHistoryController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .fullScreen
+        vc.name = story[indexPath.row].name!
+        present(vc, animated: true)
+    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+            return true
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let item = self.story[indexPath.row]
+        self.context.delete(item)
+        self.story.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath] , with: .fade)
+        tableView.reloadData()
+        
+    }
 }
 extension HistoryController {
     func loadLocalData(with request:NSFetchRequest<History> = History.fetchRequest()) {

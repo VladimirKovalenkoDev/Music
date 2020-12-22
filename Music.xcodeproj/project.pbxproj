@@ -12,6 +12,11 @@
 		DD50FBF72590B7B7006FFD55 /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50FBF62590B7B7006FFD55 /* HistoryController.swift */; };
 		DD50FBFA2590BD8B006FFD55 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50FBF92590BD8B006FFD55 /* SearchListCell.swift */; };
 		DD50FC0D259234C0006FFD55 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50FC0C259234C0006FFD55 /* HistoryCell.swift */; };
+		DD50FC1725924351006FFD55 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50FC1625924351006FFD55 /* AlbumCell.swift */; };
+		DD50FC1B259243BD006FFD55 /* AlbumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50FC1A259243BD006FFD55 /* AlbumController.swift */; };
+		DD50FC2125925261006FFD55 /* CoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50FC2025925261006FFD55 /* CoverCell.swift */; };
+		DD50FC25259290EF006FFD55 /* CopyrightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50FC24259290EF006FFD55 /* CopyrightCell.swift */; };
+		DD50FC2C2592977A006FFD55 /* AlbumsFromHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50FC2B2592977A006FFD55 /* AlbumsFromHistoryController.swift */; };
 		DDB286BD258F778000358410 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB286BC258F778000358410 /* AppDelegate.swift */; };
 		DDB286BF258F778000358410 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB286BE258F778000358410 /* SceneDelegate.swift */; };
 		DDB286C1258F778000358410 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB286C0258F778000358410 /* SearchController.swift */; };
@@ -30,6 +35,11 @@
 		DD50FBF62590B7B7006FFD55 /* HistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
 		DD50FBF92590BD8B006FFD55 /* SearchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
 		DD50FC0C259234C0006FFD55 /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		DD50FC1625924351006FFD55 /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
+		DD50FC1A259243BD006FFD55 /* AlbumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumController.swift; sourceTree = "<group>"; };
+		DD50FC2025925261006FFD55 /* CoverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverCell.swift; sourceTree = "<group>"; };
+		DD50FC24259290EF006FFD55 /* CopyrightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyrightCell.swift; sourceTree = "<group>"; };
+		DD50FC2B2592977A006FFD55 /* AlbumsFromHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsFromHistoryController.swift; sourceTree = "<group>"; };
 		DDB286B9258F778000358410 /* Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Music.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDB286BC258F778000358410 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDB286BE258F778000358410 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +83,35 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		DD50FC0F25924243006FFD55 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				DDB286C0258F778000358410 /* SearchController.swift */,
+				DD50FBF92590BD8B006FFD55 /* SearchListCell.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		DD50FC102592426C006FFD55 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				DD50FBF62590B7B7006FFD55 /* HistoryController.swift */,
+				DD50FC0C259234C0006FFD55 /* HistoryCell.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		DD50FC1925924385006FFD55 /* Album */ = {
+			isa = PBXGroup;
+			children = (
+				DD50FC1625924351006FFD55 /* AlbumCell.swift */,
+				DD50FC1A259243BD006FFD55 /* AlbumController.swift */,
+				DD50FC2025925261006FFD55 /* CoverCell.swift */,
+				DD50FC24259290EF006FFD55 /* CopyrightCell.swift */,
+			);
+			path = Album;
+			sourceTree = "<group>";
+		};
 		DDB286B0258F777F00358410 = {
 			isa = PBXGroup;
 			children = (
@@ -110,11 +149,11 @@
 		DDB286DC258F7EF900358410 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				DDB286C0258F778000358410 /* SearchController.swift */,
-				DD50FBF92590BD8B006FFD55 /* SearchListCell.swift */,
+				DD50FC1925924385006FFD55 /* Album */,
 				DD50FBF22590B693006FFD55 /* TabBarController.swift */,
-				DD50FBF62590B7B7006FFD55 /* HistoryController.swift */,
-				DD50FC0C259234C0006FFD55 /* HistoryCell.swift */,
+				DD50FC0F25924243006FFD55 /* Search */,
+				DD50FC102592426C006FFD55 /* History */,
+				DD50FC2B2592977A006FFD55 /* AlbumsFromHistoryController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -251,15 +290,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDB286C1258F778000358410 /* SearchController.swift in Sources */,
+				DD50FC1B259243BD006FFD55 /* AlbumController.swift in Sources */,
 				DD50FBFA2590BD8B006FFD55 /* SearchListCell.swift in Sources */,
 				DDB286DF258F7F5000358410 /* SearchItems.swift in Sources */,
 				DDB286BD258F778000358410 /* AppDelegate.swift in Sources */,
 				DD50FC0D259234C0006FFD55 /* HistoryCell.swift in Sources */,
 				DDB286BF258F778000358410 /* SceneDelegate.swift in Sources */,
 				DD50FBF32590B693006FFD55 /* TabBarController.swift in Sources */,
+				DD50FC2C2592977A006FFD55 /* AlbumsFromHistoryController.swift in Sources */,
 				DD50FBF72590B7B7006FFD55 /* HistoryController.swift in Sources */,
+				DD50FC25259290EF006FFD55 /* CopyrightCell.swift in Sources */,
 				DDB286EA258F86B300358410 /* Request.swift in Sources */,
+				DD50FC2125925261006FFD55 /* CoverCell.swift in Sources */,
 				DDB286C7258F778000358410 /* Music.xcdatamodeld in Sources */,
+				DD50FC1725924351006FFD55 /* AlbumCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

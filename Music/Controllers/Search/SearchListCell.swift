@@ -9,19 +9,19 @@ import UIKit
 
 class SearchListCell: UICollectionViewCell {
     static let id = "SearchListCell"
-    let albumImage: UIImageView = {
+    lazy var albumImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
         imageView.contentMode = .scaleToFill
         return imageView
     }()
-    let albumName: UILabel = {
+    lazy var albumName: UILabel = {
         let label = UILabel()
         label.text = "Album Name"
         label.font = UIFont(name: "System", size: 13)
         return label
     }()
-    let artistName: UILabel = {
+    lazy var artistName: UILabel = {
         let label = UILabel()
         label.text = "Artist Name"
         label.textColor = .lightGray

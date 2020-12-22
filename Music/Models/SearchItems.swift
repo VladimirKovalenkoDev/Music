@@ -10,7 +10,9 @@ struct Results: Codable {
     let results: [SearchItems]
 }
 struct SearchItems: Codable {
-    let artistName: String
-    let collectionName: String
-    let artworkUrl100: String
+    let artistName: String?
+    let copyright: String?
+    let trackName: String?
+    let collectionName: String?
+    let artworkUrl100: String?
 }

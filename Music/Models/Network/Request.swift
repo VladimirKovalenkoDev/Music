@@ -20,6 +20,17 @@ struct SearchManager  {
             performRequest(with: urlString)
             print(urlString)
         }
+    }
+    func showMusic(name: String, album: String) {
+        if let dataName = name.data(using: .utf8){
+            if let dataAlbum = album.data(using: .utf8){
+                let encodedAlbum = dataAlbum.map { String(format: "%%%02hhX", $0) }.joined()
+                let encodedName = dataName.map { String(format: "%%%02hhX", $0) }.joined()
+                let urlString = "https://itunes.apple.com/search?term=\(encodedName)&term=\(encodedAlbum)&entity=song"
+                performRequest(with: urlString)
+                print(urlString)
+            }
+        }
         
     }
     func performRequest(with urlString: String){

@@ -35,7 +35,6 @@ class SearchController: UIViewController {
         setUpSearchBar()
         collectionView.keyboardDismissMode = .onDrag
         view.backgroundColor = .white
-        
     }
     func configureCollectionView() {
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
@@ -94,8 +93,8 @@ extension SearchController: UICollectionViewDelegate,
         cell.artistName.text = results[indexPath.row].artistName
         cell.albumName.text = results[indexPath.row].collectionName
         let artworkSting100 = results[indexPath.row].artworkUrl100
-        let artworkSting600 = artworkSting100.replacingOccurrences(of: "100x100", with: "600x600")
-        if let imageURL = URL(string: artworkSting600) {
+        let artworkSting600 = artworkSting100?.replacingOccurrences(of: "100x100", with: "600x600")
+        if let imageURL = URL(string: artworkSting600!) {
             DispatchQueue.global(qos: .userInitiated).async {
                 let contextOfUrl = try? Data(contentsOf: imageURL)
                 DispatchQueue.main.async {
@@ -114,11 +113,18 @@ extension SearchController: UICollectionViewDelegate,
         return CGSize(width: 180, height: 180)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-//        let vc = HistoryController()
-//        vc.modalTransitionStyle = .crossDissolve
-//        vc.modalPresentationStyle = .formSheet
-//        present(vc, animated: true)
+        let name = results[indexPath.row].artistName
+        let album = results[indexPath.row].collectionName
+        let coverUrl = results[indexPath.row].artworkUrl100
+        let copyright = results[indexPath.row].copyright
+        let vc = AlbumController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .fullScreen
+        vc.album = album!
+        vc.name = name!
+        vc.coverUrl = coverUrl!
+        vc.copyright = copyright!
+        present(vc, animated: true)
     }
 
 
