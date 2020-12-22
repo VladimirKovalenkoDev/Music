@@ -11,9 +11,8 @@ class SearchListCell: UICollectionViewCell {
     static let id = "SearchListCell"
     let albumImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .cyan
+        imageView.backgroundColor = .lightGray
         imageView.contentMode = .scaleToFill
-        //imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     let albumName: UILabel = {

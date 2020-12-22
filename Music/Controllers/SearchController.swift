@@ -16,6 +16,14 @@ var searchManager = SearchManager()
     var displayHeight = CGFloat()
     var layout = UICollectionViewFlowLayout()
     var navBar = UINavigationBar()
+    lazy var searchBar : UISearchBar = {
+        let bar = UISearchBar()
+        bar.placeholder = "Search Artist"
+        bar.delegate = self
+        bar.barStyle = .default
+        bar.sizeToFit()
+        return bar
+    }()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.searchManager.makeSearch(name: "Anacondaz")
@@ -23,44 +31,37 @@ var searchManager = SearchManager()
     override func viewDidLoad() {
         super.viewDidLoad()
         searchManager.delegate = self
-        confureLayout()
         configureCollectionView()
+        setUpSearchBar()
+        collectionView.keyboardDismissMode = .onDrag
         view.backgroundColor = .white
     }
-    
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        (collectionView.collectionViewLayout
-//            as? UICollectionViewFlowLayout)?
-//            .footerReferenceSize
-//            = CGSize(width: view.bounds.width,
-//                     height: view.bounds.height)
-//    }
-    
-    
     func configureCollectionView() {
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .orange
+        collectionView.backgroundColor = .clear
         collectionView.isPagingEnabled = false
-        collectionView.showsVerticalScrollIndicator = true
+        collectionView.showsVerticalScrollIndicator = false
         
         collectionView.register(SearchListCell.self, forCellWithReuseIdentifier: SearchListCell.id)
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().inset(UIEdgeInsets(top: 367, left: 0, bottom: 0, right: 0))
+            make.top.equalToSuperview().inset(UIEdgeInsets(top: 110, left: 0, bottom: 0, right: 0))
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             make.bottom.equalToSuperview()
             
         }
     }
-    func confureLayout() {
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.minimumLineSpacing = 2
-        layout.minimumInteritemSpacing = 2
-        layout.scrollDirection = .vertical
+    func setUpSearchBar() {
+        view.addSubview(searchBar)
+        searchBar.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(35)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.height.equalTo(70)
+        }
     }
 }
 
@@ -93,7 +94,7 @@ extension SearchController: UICollectionViewDelegate,
         cell.albumName.text = results[indexPath.row].collectionName
         let artworkSting100 = results[indexPath.row].artworkUrl100
         let artworkSting600 = artworkSting100.replacingOccurrences(of: "100x100", with: "600x600")
-        if let imageURL = URL(string: artworkSting600 ) {
+        if let imageURL = URL(string: artworkSting600) {
         //cell.spinner.startAnimating()
             DispatchQueue.global(qos: .userInitiated).async {
                 let contextOfUrl = try? Data(contentsOf: imageURL)
@@ -121,4 +122,10 @@ extension SearchController: UICollectionViewDelegate,
 //        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 //    }
 
+}
+extension SearchController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchManager.makeSearch(name: searchBar.text!)
+        self.searchBar.endEditing(true)
+      }
 }
