@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 class HistoryController: UIViewController {
+    // MARK: - properties
     var story = [History]()
     let context  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var frame = CGRect()
@@ -32,6 +33,7 @@ class HistoryController: UIViewController {
         }
     }
 }
+// MARK: -  Table view delegate and data source methods
 extension HistoryController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
@@ -63,6 +65,7 @@ extension HistoryController: UITableViewDataSource, UITableViewDelegate{
         
     }
 }
+// MARK: - Core data LOAD
 extension HistoryController {
     func loadLocalData(with request:NSFetchRequest<History> = History.fetchRequest()) {
         do {

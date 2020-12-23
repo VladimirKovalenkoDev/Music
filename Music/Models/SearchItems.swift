@@ -13,6 +13,7 @@ struct SearchItems: Codable {
     let artistName: String?
     let copyright: String?
     let trackName: String?
+    let collectionId: Int?
     let collectionName: String?
     let artworkUrl100: String?
 }

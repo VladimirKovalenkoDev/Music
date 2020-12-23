@@ -9,17 +9,17 @@ import UIKit
 import SnapKit
 import CoreData
 class SearchController: UIViewController {
+    // MARK: - properties
     var searchManager = SearchManager()
     var results = [SearchItems]()
     var history = [History]()
     let context  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var collectionView: UICollectionView!
     var frame = CGRect()
     var displayWidth = CGFloat()
     var displayHeight = CGFloat()
     var layout = UICollectionViewFlowLayout()
-    var navBar = UINavigationBar()
-    
+    // MARK: - UI elements
+    var collectionView: UICollectionView!
     lazy var searchBar : UISearchBar = {
         let bar = UISearchBar()
         bar.placeholder = "Search Artist"
@@ -35,7 +35,11 @@ class SearchController: UIViewController {
         setUpSearchBar()
         collectionView.keyboardDismissMode = .onDrag
         view.backgroundColor = .white
+        let slideDown = UISwipeGestureRecognizer(target: self, action: #selector(dismissView(gesture:)))
+        slideDown.direction = .down
+        view.addGestureRecognizer(slideDown)
     }
+    // MARK: - add ui elements methods
     func configureCollectionView() {
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.delegate = self
@@ -63,8 +67,11 @@ class SearchController: UIViewController {
             make.height.equalTo(70)
         }
     }
+    @objc func dismissView(gesture: UISwipeGestureRecognizer) {
+        searchBar.endEditing(true)
+    }
 }
-
+// MARK: - Networking
 extension SearchController:  SearchManagerDelegate{
     func didSearch(_ searchManager: SearchManager, searchItems: Results) {
         DispatchQueue.main.async {
@@ -76,6 +83,7 @@ extension SearchController:  SearchManagerDelegate{
         print(error)
     }
 }
+// MARK: - collection view layout, delegate, datasource methods
 extension SearchController: UICollectionViewDelegate,
                                  UICollectionViewDataSource,
                                  UICollectionViewDelegateFlowLayout {
@@ -117,6 +125,7 @@ extension SearchController: UICollectionViewDelegate,
         let album = results[indexPath.row].collectionName
         let coverUrl = results[indexPath.row].artworkUrl100
         let copyright = results[indexPath.row].copyright
+        let collectionId = results[indexPath.row].collectionId
         let vc = AlbumController()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .fullScreen
@@ -124,11 +133,13 @@ extension SearchController: UICollectionViewDelegate,
         vc.name = name!
         vc.coverUrl = coverUrl!
         vc.copyright = copyright!
+        vc.id = collectionId!
         present(vc, animated: true)
     }
 
 
 }
+// MARK: - search bar delegate methods
 extension SearchController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchManager.makeSearch(name: searchBar.text!)
@@ -139,7 +150,7 @@ extension SearchController: UISearchBarDelegate {
         saveData()
       }
 }
-
+// MARK: - core data SAVE
 extension SearchController {
     func saveData(){
         if context.hasChanges {

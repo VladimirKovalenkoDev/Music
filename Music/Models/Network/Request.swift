@@ -13,24 +13,20 @@ protocol SearchManagerDelegate {
 
 struct SearchManager  {
     var delegate : SearchManagerDelegate?
-    func makeSearch(name: String){
+    
+    func makeSearch(name: String){//method which performs a search albums
         if let data = name.data(using: .utf8){
-            let encoded = data.map { String(format: "%%%02hhX", $0) }.joined()
-            let urlString = "https://itunes.apple.com/search?term=\(encoded)&entity=album"
+            let encoded = data.map { String(format: "%%%02hhX", $0) }.joined()//coding text to right format
+            let urlString = "https://itunes.apple.com/search?term=\(encoded)&entity=album" //put encoded artist name to string
             performRequest(with: urlString)
             print(urlString)
         }
     }
-    func showMusic(name: String, album: String) {
-        if let dataName = name.data(using: .utf8){
-            if let dataAlbum = album.data(using: .utf8){
-                let encodedAlbum = dataAlbum.map { String(format: "%%%02hhX", $0) }.joined()
-                let encodedName = dataName.map { String(format: "%%%02hhX", $0) }.joined()
-                let urlString = "https://itunes.apple.com/search?term=\(encodedName)&term=\(encodedAlbum)&entity=song"
-                performRequest(with: urlString)
-                print(urlString)
-            }
-        }
+    func showMusic(collectionId: Int) {//method which shows music from album
+        let collectionIdString = String(collectionId)
+        let urlString = "http://itunes.apple.com/lookup?country=us&entity=song&id=\(collectionIdString)"
+        performRequest(with: urlString)
+        print(urlString)
         
     }
     func performRequest(with urlString: String){
@@ -59,14 +55,11 @@ struct SearchManager  {
 
         }
     func parseJSON(_ searchData: Data) -> Results? {
-        let decoder = JSONDecoder()
+        let decoder = JSONDecoder()// create decoder
         do {
-            
+            //decoding
       let decodeData = try decoder.decode(Results.self, from: searchData)
             let results = decodeData.results
-//            let artist = decodeData.results[0].artistName
-//            let collectionName = decodeData.results[1].collectionName
-//            let artwork = decodeData.results[2].artworkUrl100
             let searchItems  = Results(results: results)
             return searchItems
         }catch{

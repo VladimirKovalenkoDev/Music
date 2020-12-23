@@ -12,11 +12,15 @@ class CoverCell: UITableViewCell {
     lazy var albumName: UILabel = {
         let label = UILabel()
         label.text = "Album Name"
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 2
+        label.textAlignment = .center
         return label
     }()
     lazy var artistName: UILabel = {
         let label = UILabel()
         label.text = "Artist Name"
+        label.textAlignment = .center
         label.textColor = .systemRed
         return label
     }()
@@ -46,12 +50,14 @@ class CoverCell: UITableViewCell {
         albumName.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(212)
             make.centerX.equalToSuperview()
-            make.height.equalTo(25)
+            make.height.equalTo(50)
+            make.width.equalTo(241)
         }
         artistName.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(242)
+            make.top.equalToSuperview().offset(250)
             make.centerX.equalToSuperview()
             make.height.equalTo(25)
+            make.width.equalTo(241)
         }
     }
     

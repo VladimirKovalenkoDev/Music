@@ -11,15 +11,17 @@ class AlbumsFromHistoryController: UIViewController,
                                    UICollectionViewDelegate,
                                    UICollectionViewDataSource,
                                    UICollectionViewDelegateFlowLayout {
-    
+    // MARK: - properties and collection view
     var collectionView: UICollectionView!
     var results = [SearchItems]()
     var searchManager = SearchManager()
     var frame = CGRect()
     var layout = UICollectionViewFlowLayout()
     var name = ""
+    // MARK: - UI elements declaration
     lazy var navigation: UIView =  {
         let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.9354471564, green: 0.9298860431, blue: 0.9397215843, alpha: 1)
         return view
     }()
     lazy var backButton: UIButton = {
@@ -37,6 +39,7 @@ class AlbumsFromHistoryController: UIViewController,
         searchManager.makeSearch(name:name)
         view.backgroundColor = .white
     }
+    // MARK: - setting up views methods,put constraints to the elements
     func configureCollectionView() {
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.delegate = self
@@ -74,6 +77,7 @@ class AlbumsFromHistoryController: UIViewController,
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.results.count
     }
+    // MARK: - collection view methods
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
@@ -106,6 +110,7 @@ class AlbumsFromHistoryController: UIViewController,
         let album = results[indexPath.row].collectionName
         let coverUrl = results[indexPath.row].artworkUrl100
         let copyright = results[indexPath.row].copyright
+        let collectionId = results[indexPath.row].collectionId
         let vc = AlbumController()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .fullScreen
@@ -113,9 +118,11 @@ class AlbumsFromHistoryController: UIViewController,
         vc.name = name!
         vc.coverUrl = coverUrl!
         vc.copyright = copyright!
+        vc.id = collectionId!
         present(vc, animated: true)
     }
 }
+// MARK: -  Networking
 extension AlbumsFromHistoryController: SearchManagerDelegate {
     func didSearch(_ searchManager: SearchManager, searchItems: Results) {
         DispatchQueue.main.async {

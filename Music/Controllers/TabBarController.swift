@@ -14,7 +14,8 @@ class TabBarController: UITabBarController {
         addTabBar()
         setMenuViewControllers()
     }
-    
+    // MARK: - making tab bar items
+    // get pictures from sfsymbols
     private func setMenuViewControllers() {
         let searchController = SearchController()
         searchController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag:  0)
@@ -28,7 +29,6 @@ class TabBarController: UITabBarController {
     private func addTabBar(){
         self.delegate = self
         tabBar.backgroundColor = .white
-
     }
 
 }
