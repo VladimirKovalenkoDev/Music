@@ -30,6 +30,13 @@ class CoverCell: UITableViewCell {
         imageView.contentMode = .scaleToFill
         return imageView
     }()
+    lazy var advisoryRating: UILabel = {
+        let label = UILabel()
+        label.text = "advisory"
+        label.font = UIFont.systemFont(ofSize: 10)
+        label.textColor = .systemGray
+        return label
+    }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpElements()
@@ -41,6 +48,7 @@ class CoverCell: UITableViewCell {
         addSubview(cover)
         addSubview(albumName)
         addSubview(artistName)
+        addSubview(advisoryRating)
         cover.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
@@ -59,6 +67,11 @@ class CoverCell: UITableViewCell {
             make.height.equalTo(25)
             make.width.equalTo(241)
         }
+        advisoryRating.snp.makeConstraints { (make) in
+            make.top.equalTo(artistName.snp.bottom)
+            make.centerX.equalToSuperview()
+        }
+        
     }
     
 }

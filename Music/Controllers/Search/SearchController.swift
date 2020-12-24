@@ -76,6 +76,7 @@ extension SearchController:  SearchManagerDelegate{
     func didSearch(_ searchManager: SearchManager, searchItems: Results) {
         DispatchQueue.main.async {
             self.results = searchItems.results
+            print(self.results)
             self.collectionView.reloadData()
         }
     }
@@ -98,9 +99,18 @@ extension SearchController: UICollectionViewDelegate,
             withReuseIdentifier: SearchListCell.id,
                 for: indexPath) as? SearchListCell else { return UICollectionViewCell() }
         cell.setCell()
-        cell.artistName.text = results[indexPath.row].artistName
-        cell.albumName.text = results[indexPath.row].collectionName
-        let artworkSting100 = results[indexPath.row].artworkUrl100
+        let sortetdResults = results.sorted(by: { $0.collectionName! < $1.collectionName! })
+        switch sortetdResults[indexPath.row].contentAdvisoryRating {
+        case "Clean":
+            cell.advisoryRating.text = sortetdResults[indexPath.row].contentAdvisoryRating
+        case "Explicit":
+            cell.advisoryRating.text = sortetdResults[indexPath.row].contentAdvisoryRating
+        default:
+            cell.advisoryRating.text = ""
+        }
+        cell.artistName.text = sortetdResults[indexPath.row].artistName
+        cell.albumName.text = sortetdResults[indexPath.row].collectionName
+        let artworkSting100 = sortetdResults[indexPath.row].artworkUrl100
         let artworkSting600 = artworkSting100?.replacingOccurrences(of: "100x100", with: "600x600")
         if let imageURL = URL(string: artworkSting600!) {
             DispatchQueue.global(qos: .userInitiated).async {
@@ -118,14 +128,15 @@ extension SearchController: UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 180, height: 180)
+        return CGSize(width: 180, height: 200)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let name = results[indexPath.row].artistName
-        let album = results[indexPath.row].collectionName
-        let coverUrl = results[indexPath.row].artworkUrl100
-        let copyright = results[indexPath.row].copyright
-        let collectionId = results[indexPath.row].collectionId
+        let sortetdResults = results.sorted(by: { $0.collectionName! < $1.collectionName! })
+        let name = sortetdResults[indexPath.row].artistName
+        let album = sortetdResults[indexPath.row].collectionName
+        let coverUrl = sortetdResults[indexPath.row].artworkUrl100
+        let copyright = sortetdResults[indexPath.row].copyright
+        let collectionId = sortetdResults[indexPath.row].collectionId
         let vc = AlbumController()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .fullScreen
@@ -134,6 +145,9 @@ extension SearchController: UICollectionViewDelegate,
         vc.coverUrl = coverUrl!
         vc.copyright = copyright!
         vc.id = collectionId!
+        if let contentRaiting = sortetdResults[indexPath.row].contentAdvisoryRating {
+            vc.contentRaiting = contentRaiting
+        }
         present(vc, animated: true)
     }
 

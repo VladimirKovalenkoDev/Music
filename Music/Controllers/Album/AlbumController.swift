@@ -26,6 +26,7 @@ class AlbumController: UIViewController {
     var album = ""
     var coverUrl = ""
     var copyright = ""
+    var contentRaiting = ""
     var id = 0
     var results = [SearchItems]()
     var searchManager = SearchManager()
@@ -100,6 +101,7 @@ extension AlbumController: UITableViewDataSource,
                                                         for: indexPath) as! CoverCell
              cell.albumName.text = album
              cell.artistName.text = name
+             cell.advisoryRating.text = contentRaiting
              let artworkSting100 = coverUrl
              let artworkSting600 = artworkSting100.replacingOccurrences(of: "100x100", with: "600x600")
              if let imageURL = URL(string: artworkSting600) {
