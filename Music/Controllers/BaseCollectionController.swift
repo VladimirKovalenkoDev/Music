@@ -1,30 +1,27 @@
 //
-//  AlbumsFromHistoryControllerViewController.swift
+//  BaseCollectionController.swift
 //  Music
 //
-//  Created by Владимир Коваленко on 23.12.2020.
+//  Created by Владимир Коваленко on 13.03.2021.
 //
 
 import UIKit
 
-class AlbumsFromHistoryController: UIViewController,
-                                   UICollectionViewDelegate,
-                                   UICollectionViewDataSource,
-                                   UICollectionViewDelegateFlowLayout {
-    // MARK: - properties and collection view
-    var collectionView: UICollectionView!
-    var results = [SearchItems]()
-    var searchManager = SearchManager()
-    var frame = CGRect()
-    var layout = UICollectionViewFlowLayout()
-    var name = ""
-    // MARK: - UI elements declaration
-    lazy var navigation: UIView =  {
+class BaseCollectionController: UIViewController,
+                                UICollectionViewDataSource,
+                                UICollectionViewDelegate,
+                                UICollectionViewDelegateFlowLayout {
+    public var collectionView: UICollectionView!
+    private var frame = CGRect()
+    private var layout = UICollectionViewFlowLayout()
+    public var results = [SearchItems]()
+    public var searchManager = SearchManager()
+    public lazy var navigation: UIView =  {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.9354471564, green: 0.9298860431, blue: 0.9397215843, alpha: 1)
         return view
     }()
-    lazy var backButton: UIButton = {
+    public lazy var backButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "back"), for: .normal)
         button.addTarget(self, action:  #selector(goBackPressed), for: .touchUpInside)
@@ -35,19 +32,18 @@ class AlbumsFromHistoryController: UIViewController,
         searchManager.delegate = self
         configureCollectionView()
         setUpNavView()
-        
-        searchManager.makeSearch(name:name)
         view.backgroundColor = .white
     }
     // MARK: - setting up views methods,put constraints to the elements
-    func configureCollectionView() {
+    private func configureCollectionView() {
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .clear
         collectionView.isPagingEnabled = false
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.register(SearchListCell.self, forCellWithReuseIdentifier: SearchListCell.id)
+        collectionView.register(SearchListCell.self,
+                                forCellWithReuseIdentifier: SearchListCell.id)
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(88)
@@ -57,33 +53,32 @@ class AlbumsFromHistoryController: UIViewController,
             
         }
     }
-    func setUpNavView(){
+    private func setUpNavView(){
         view.addSubview(navigation)
-        self.navigation.addSubview(backButton)
         navigation.snp.makeConstraints { (make) in
             make.top.equalTo(view)
             make.left.equalToSuperview().offset(0)
             make.right.equalToSuperview().offset(0)
             make.height.equalTo(88)
         }
-        backButton.snp.makeConstraints { (make) in
-            make.top.equalTo(navigation).offset(55.57)
-            make.left.equalTo(navigation).offset(10)
-        }
     }
     @objc func goBackPressed(_ sender: UIButton!){
         dismiss(animated: true, completion: nil)
     }
+    // MARK: - collection view methods
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 180, height: 180)
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.results.count
     }
-    // MARK: - collection view methods
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: SearchListCell.id,
                 for: indexPath) as? SearchListCell else { return UICollectionViewCell() }
-        cell.setCell()
         let sortetdResults = results.sorted(by: { $0.collectionName! < $1.collectionName! })
         switch sortetdResults[indexPath.row].contentAdvisoryRating {
         case "Clean":
@@ -109,11 +104,6 @@ class AlbumsFromHistoryController: UIViewController,
 }
         return cell
     }
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 180, height: 180)
-    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let sortetdResults = results.sorted(by: { $0.collectionName! < $1.collectionName! })
         let name = sortetdResults[indexPath.row].artistName
@@ -136,7 +126,7 @@ class AlbumsFromHistoryController: UIViewController,
     }
 }
 // MARK: -  Networking
-extension AlbumsFromHistoryController: SearchManagerDelegate {
+extension BaseCollectionController: SearchManagerDelegate {
     func didSearch(_ searchManager: SearchManager, searchItems: Results) {
         DispatchQueue.main.async {
             self.results = searchItems.results

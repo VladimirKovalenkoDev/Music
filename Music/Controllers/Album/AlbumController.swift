@@ -115,7 +115,7 @@ extension AlbumController: UITableViewDataSource,
                        }
                    }
             return cell
-        } else if indexPath.section == 1 { //AlbumCell must be after
+        }else if indexPath.section == 1 { //AlbumCell must be after
             let cell = tableView.dequeueReusableCell(withIdentifier: AlbumCell.reuseIdentifier,
                                                      for: indexPath)
             cell.textLabel?.text = results[indexPath.row].trackName
@@ -127,7 +127,6 @@ extension AlbumController: UITableViewDataSource,
             cell.textLabel?.textColor = .lightGray
             return cell
         }
-          
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
