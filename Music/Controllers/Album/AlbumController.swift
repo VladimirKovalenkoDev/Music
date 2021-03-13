@@ -9,13 +9,13 @@ import UIKit
 
 class AlbumController: UIViewController {
 // MARK: - UI elements declaration
-    let tableView = UITableView()
+    private let tableView = UITableView()
     lazy var navigation: UIView =  {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.9354471564, green: 0.9298860431, blue: 0.9397215843, alpha: 1)
         return view
     }()
-    lazy var backButton: UIButton = {
+    private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "back"), for: .normal)
         button.addTarget(self, action:  #selector(goBackPressed), for: .touchUpInside)
@@ -37,28 +37,28 @@ class AlbumController: UIViewController {
         searchManager.delegate = self
         setView()
         setUpNavView()
-        tableView.separatorStyle = .none
-        tableView.allowsSelection = false
-        //register cells
-       tableView.register(AlbumCell.self, forCellReuseIdentifier: AlbumCell.reuseIdentifier)
-       tableView.register(CoverCell.self, forCellReuseIdentifier: CoverCell.reuseIdentifier)
-       tableView.register(CopyrightCell.self, forCellReuseIdentifier: CopyrightCell.reuseIdentifier)
     }
     override func viewWillAppear(_ animated: Bool) {
             self.searchManager.showMusic(collectionId: self.id)
     }
     // MARK: - setting up views methods,put constraints to the elements
-    func setView() {
+    private func setView() {
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(self.tableView)
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
+        //register cells
+       tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AlbumCell")
+       tableView.register(CoverCell.self, forCellReuseIdentifier: CoverCell.reuseIdentifier)
+       tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CopyrightCell")
         tableView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(88)
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
     }
-    func setUpNavView(){
+   private func setUpNavView(){
         view.addSubview(navigation)
         self.navigation.addSubview(backButton)
         navigation.snp.makeConstraints { (make) in
@@ -116,12 +116,12 @@ extension AlbumController: UITableViewDataSource,
                    }
             return cell
         }else if indexPath.section == 1 { //AlbumCell must be after
-            let cell = tableView.dequeueReusableCell(withIdentifier: AlbumCell.reuseIdentifier,
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell",
                                                      for: indexPath)
             cell.textLabel?.text = results[indexPath.row].trackName
                return cell
         } else { //CopyrightCell must be the last
-            let cell = tableView.dequeueReusableCell(withIdentifier: CopyrightCell.reuseIdentifier,
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CopyrightCell",
                                                      for: indexPath)
             cell.textLabel?.text = copyright
             cell.textLabel?.textColor = .lightGray
