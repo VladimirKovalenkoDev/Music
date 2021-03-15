@@ -19,13 +19,10 @@ class HistoryController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
         setTableView()
     }
     override func viewWillAppear(_ animated: Bool) {
-        loadLocalData()
+        tableView.reloadData()
     }
     func setTableView() {
         tableView.delegate = self
@@ -38,6 +35,7 @@ class HistoryController: UIViewController {
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        story = core.loadLocalData()
     }
 }
 // MARK: -  Table view delegate and data source methods
@@ -49,6 +47,7 @@ extension HistoryController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
+        
         cell.textLabel?.text = story[indexPath.row].name
         return cell
     }
@@ -71,14 +70,13 @@ extension HistoryController: UITableViewDataSource, UITableViewDelegate{
         
     }
 }
-// MARK: - Core data LOAD
-extension HistoryController {
-    func loadLocalData(with request:NSFetchRequest<History> = History.fetchRequest()) {
-        do {
-           story =  try context.fetch(request)
-        } catch  {
-            print("error fetching data from context:\(error)")
-            }
-        tableView.reloadData()
-    }
-}
+//extension HistoryController {
+//    func loadLocalData(with request:NSFetchRequest<History> = History.fetchRequest()) {
+//        do {
+//           story =  try context.fetch(request)
+//        } catch  {
+//            print("error fetching data from context:\(error)")
+//            }
+//        tableView.reloadData()
+//    }
+//}
