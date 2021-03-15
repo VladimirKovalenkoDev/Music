@@ -14,10 +14,14 @@ class HistoryController: UIViewController {
                     AppDelegate).persistentContainer.viewContext
     var frame = CGRect()
     let tableView = UITableView()
+    var core = Core()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         setTableView()
     }
     override func viewWillAppear(_ animated: Bool) {

@@ -23,6 +23,7 @@
 		DDB286DF258F7F5000358410 /* SearchItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB286DE258F7F5000358410 /* SearchItems.swift */; };
 		DDB286EA258F86B300358410 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB286E9258F86B300358410 /* SearchManager.swift */; };
 		DDE7CEC125FCEB070064FD56 /* BaseCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE7CEC025FCEB070064FD56 /* BaseCollectionController.swift */; };
+		DDE7CEC925FF70CF0064FD56 /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE7CEC825FF70CF0064FD56 /* Core.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		DDB286DE258F7F5000358410 /* SearchItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItems.swift; sourceTree = "<group>"; };
 		DDB286E9258F86B300358410 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		DDE7CEC025FCEB070064FD56 /* BaseCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionController.swift; sourceTree = "<group>"; };
+		DDE7CEC825FF70CF0064FD56 /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
 		F8B0E93C8D67781B26DC849F /* Pods-Music.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Music.debug.xcconfig"; path = "Target Support Files/Pods-Music/Pods-Music.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 				DDB286BC258F778000358410 /* AppDelegate.swift */,
 				DDB286BE258F778000358410 /* SceneDelegate.swift */,
 				DDB286E7258F869000358410 /* Network */,
+				DDE7CECB25FF70DE0064FD56 /* Core */,
 				DDB286E2258F7F5800358410 /* Models */,
 				DDB286DC258F7EF900358410 /* Controllers */,
 				DDB286C8258F778300358410 /* Assets.xcassets */,
@@ -164,6 +167,14 @@
 				DDB286E9258F86B300358410 /* SearchManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		DDE7CECB25FF70DE0064FD56 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				DDE7CEC825FF70CF0064FD56 /* Core.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +300,7 @@
 				DD50FBF32590B693006FFD55 /* TabBarController.swift in Sources */,
 				DD50FC2C2592977A006FFD55 /* AlbumsFromHistoryController.swift in Sources */,
 				DD50FBF72590B7B7006FFD55 /* HistoryController.swift in Sources */,
+				DDE7CEC925FF70CF0064FD56 /* Core.swift in Sources */,
 				DDB286EA258F86B300358410 /* SearchManager.swift in Sources */,
 				DD50FC2125925261006FFD55 /* CoverCell.swift in Sources */,
 				DDB286C7258F778000358410 /* Music.xcdatamodeld in Sources */,

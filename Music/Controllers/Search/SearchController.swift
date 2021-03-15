@@ -11,6 +11,7 @@ import CoreData
 class SearchController: BaseCollectionController{
     // MARK: - properties
     var history = [History]()
+    let core = Core()
     let context  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var frame = CGRect()
     var displayWidth = CGFloat()
@@ -37,18 +38,6 @@ extension SearchController: UISearchBarDelegate {
         let newName = History(context: self.context)
         newName.name = searchBar.text!
         history.append(newName)
-        saveData()
+        core.saveData()
       }
-}
-// MARK: - core data SAVE
-extension SearchController {
-    func saveData(){
-        if context.hasChanges {
-            do {
-                try context.save()
-                } catch {
-                    print("error saving context: \(error)")
-            }
-        }
-    }
 }
