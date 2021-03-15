@@ -5,5 +5,6 @@ target 'Music' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   pod 'SnapKit'
+  pod 'Kingfisher', '~> 6.0'
 
 end

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Kingfisher
 class BaseCollectionController: UIViewController {
     public var collectionView: UICollectionView!
     private var frame = CGRect()
@@ -110,13 +110,10 @@ extension BaseCollectionController: UICollectionViewDataSource,
         cell.albumName.text = sortetdResults[indexPath.row].collectionName
         let artworkSting100 = sortetdResults[indexPath.row].artworkUrl100
         let artworkSting600 = artworkSting100?.replacingOccurrences(of: "100x100", with: "600x600")
-        if let imageURL = URL(string: artworkSting600!) {
             DispatchQueue.global(qos: .userInitiated).async {
-                let contextOfUrl = try? Data(contentsOf: imageURL)
+                if let imageURL = URL(string: artworkSting600!) {
                 DispatchQueue.main.async {
-                    if let imageData = contextOfUrl{
-                        cell.albumImage.image = UIImage(data: imageData)
-                    }
+                    cell.albumImage.kf.setImage(with: imageURL)
                 }
             }
 }
