@@ -10,12 +10,9 @@ import CoreData
 class HistoryController: UIViewController {
     // MARK: - properties
     var story = [History]()
-    let context  = (UIApplication.shared.delegate as!
-                    AppDelegate).persistentContainer.viewContext
     var frame = CGRect()
     let tableView = UITableView()
     var core = Core()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -63,20 +60,9 @@ extension HistoryController: UITableViewDataSource, UITableViewDelegate{
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let item = self.story[indexPath.row]
-        self.context.delete(item)
+        self.core.context.delete(item)
         self.story.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath] , with: .fade)
         tableView.reloadData()
-        
     }
 }
-//extension HistoryController {
-//    func loadLocalData(with request:NSFetchRequest<History> = History.fetchRequest()) {
-//        do {
-//           story =  try context.fetch(request)
-//        } catch  {
-//            print("error fetching data from context:\(error)")
-//            }
-//        tableView.reloadData()
-//    }
-//}

@@ -12,7 +12,6 @@ class SearchController: BaseCollectionController{
     // MARK: - properties
     var history = [History]()
     let core = Core()
-    let context  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var frame = CGRect()
     var displayWidth = CGFloat()
     var displayHeight = CGFloat()
@@ -35,7 +34,7 @@ extension SearchController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchManager.makeSearch(name: searchBar.text!)
         searchBar.endEditing(true)
-        let newName = History(context: self.context)
+        let newName = History(context: self.core.context)
         newName.name = searchBar.text!
         history.append(newName)
         core.saveData()
