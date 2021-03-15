@@ -8,8 +8,8 @@
 import UIKit
 
 class AlbumsFromHistoryController: BaseCollectionController{
-    // MARK: - properties
-    var name = ""
+    // MARK: - property
+    public var name = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavView()

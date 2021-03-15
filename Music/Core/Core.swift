@@ -9,7 +9,8 @@ import Foundation
 import CoreData
 import UIKit
 class Core {
-    let context  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let context  = (UIApplication.shared.delegate as!
+                    AppDelegate).persistentContainer.viewContext
     func saveData(){
         if context.hasChanges {
             do {

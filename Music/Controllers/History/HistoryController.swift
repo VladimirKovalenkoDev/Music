@@ -9,10 +9,10 @@ import UIKit
 import CoreData
 class HistoryController: UIViewController {
     // MARK: - properties
-    var story = [History]()
-    var frame = CGRect()
-    let tableView = UITableView()
-    var core = Core()
+    public var story = [History]()
+    private var frame = CGRect()
+    private let tableView = UITableView()
+    private var core = Core()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -21,7 +21,7 @@ class HistoryController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
     }
-    func setTableView() {
+   private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(self.tableView)

@@ -9,24 +9,24 @@ import UIKit
 
 class SearchListCell: UICollectionViewCell {
     static let id = "SearchListCell"
-    lazy var albumImage: UIImageView = {
+    public lazy var albumImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
         imageView.contentMode = .scaleToFill
         return imageView
     }()
-    lazy var albumName: UILabel = {
+    public lazy var albumName: UILabel = {
         let label = UILabel()
         label.text = "Album Name"
         return label
     }()
-    lazy var artistName: UILabel = {
+    public lazy var artistName: UILabel = {
         let label = UILabel()
         label.text = "Artist Name"
         label.textColor = .systemRed
         return label
     }()
-    lazy var advisoryRating: UILabel = {
+    public lazy var advisoryRating: UILabel = {
         let label = UILabel()
         label.text = "advisory"
         label.font = UIFont.systemFont(ofSize: 10)
@@ -42,7 +42,7 @@ class SearchListCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setCell() {
+    private func setCell() {
         addSubview(albumImage)
         addSubview(albumName)
         addSubview(artistName)

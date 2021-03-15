@@ -10,18 +10,15 @@ import SnapKit
 import CoreData
 class SearchController: BaseCollectionController{
     // MARK: - properties
-    var history = [History]()
-    let core = Core()
-    var frame = CGRect()
-    var displayWidth = CGFloat()
-    var displayHeight = CGFloat()
-    var layout = UICollectionViewFlowLayout()
+    public var history = [History]()
+    private let core = Core()
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
         collectionView.keyboardDismissMode = .onDrag
         view.backgroundColor = .white
-        let slideDown = UISwipeGestureRecognizer(target: self, action: #selector(dismissView(gesture:)))
+        let slideDown = UISwipeGestureRecognizer(target: self,
+                                                 action: #selector(dismissView(gesture:)))
         slideDown.direction = .down
         view.addGestureRecognizer(slideDown)
     }

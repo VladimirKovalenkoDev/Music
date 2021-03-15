@@ -10,7 +10,7 @@ import UIKit
 class AlbumController: UIViewController {
 // MARK: - UI elements declaration
     private let tableView = UITableView()
-    lazy var navigation: UIView =  {
+    private lazy var navigation: UIView =  {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.9354471564, green: 0.9298860431, blue: 0.9397215843, alpha: 1)
         return view
@@ -22,14 +22,14 @@ class AlbumController: UIViewController {
         return button
     }()
     // MARK: - properties
-    var name = ""
-    var album = ""
-    var coverUrl = ""
-    var copyright = ""
-    var contentRaiting = ""
-    var id = 0
-    var results = [SearchItems]()
-    var searchManager = SearchManager()
+    public var name = ""
+    public var album = ""
+    public var coverUrl = ""
+    public var copyright = ""
+    public var contentRaiting = ""
+    public var id = 0
+    private var results = [SearchItems]()
+    private var searchManager = SearchManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
