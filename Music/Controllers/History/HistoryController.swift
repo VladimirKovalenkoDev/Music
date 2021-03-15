@@ -10,13 +10,14 @@ import CoreData
 class HistoryController: UIViewController {
     // MARK: - properties
     var story = [History]()
-    let context  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let context  = (UIApplication.shared.delegate as!
+                    AppDelegate).persistentContainer.viewContext
     var frame = CGRect()
     let tableView = UITableView()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        tableView.register(HistoryCell.self, forCellReuseIdentifier: HistoryCell.reuseIdentifier)
+        
         setTableView()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -26,6 +27,8 @@ class HistoryController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(self.tableView)
+        tableView.register(UITableViewCell.self,
+                           forCellReuseIdentifier: "HistoryCell")
         tableView.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.left.right.equalToSuperview()
@@ -37,12 +40,11 @@ class HistoryController: UIViewController {
 extension HistoryController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        
         return story.count
     }
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HistoryCell.reuseIdentifier, for: indexPath) as! HistoryCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
         cell.textLabel?.text = story[indexPath.row].name
         return cell
     }

@@ -7,10 +7,7 @@
 
 import UIKit
 
-class BaseCollectionController: UIViewController,
-                                UICollectionViewDataSource,
-                                UICollectionViewDelegate,
-                                UICollectionViewDelegateFlowLayout {
+class BaseCollectionController: UIViewController {
     public var collectionView: UICollectionView!
     private var frame = CGRect()
     private var layout = UICollectionViewFlowLayout()
@@ -27,11 +24,19 @@ class BaseCollectionController: UIViewController,
         button.addTarget(self, action:  #selector(goBackPressed), for: .touchUpInside)
         return button
     }()
+    public lazy var searchBar : UISearchBar = {
+        let bar = UISearchBar()
+        bar.placeholder = "Search Artist"
+        bar.barStyle = .default
+        bar.sizeToFit()
+        return bar
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         searchManager.delegate = self
         configureCollectionView()
         setUpNavView()
+        setUpSearchBar()
         view.backgroundColor = .white
     }
     // MARK: - setting up views methods,put constraints to the elements
@@ -46,13 +51,21 @@ class BaseCollectionController: UIViewController,
                                 forCellWithReuseIdentifier: SearchListCell.id)
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(88)
+            make.top.equalToSuperview().offset(158)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             make.bottom.equalToSuperview()
-            
         }
     }
+    private func setUpSearchBar() {
+         view.addSubview(searchBar)
+         searchBar.snp.makeConstraints { (make) in
+             make.top.equalToSuperview().offset(88)
+             make.left.equalToSuperview()
+             make.right.equalToSuperview()
+             make.height.equalTo(70)
+         }
+     }
     private func setUpNavView(){
         view.addSubview(navigation)
         navigation.snp.makeConstraints { (make) in
@@ -65,7 +78,12 @@ class BaseCollectionController: UIViewController,
     @objc func goBackPressed(_ sender: UIButton!){
         dismiss(animated: true, completion: nil)
     }
-    // MARK: - collection view methods
+}
+// MARK: - collection view methods
+extension BaseCollectionController: UICollectionViewDataSource,
+                                    UICollectionViewDelegate,
+                                    UICollectionViewDelegateFlowLayout {
+ 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {

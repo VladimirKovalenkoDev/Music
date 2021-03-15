@@ -16,33 +16,14 @@ class SearchController: BaseCollectionController{
     var displayWidth = CGFloat()
     var displayHeight = CGFloat()
     var layout = UICollectionViewFlowLayout()
-    // MARK: - UI elements
-    lazy var searchBar : UISearchBar = {
-        let bar = UISearchBar()
-        bar.placeholder = "Search Artist"
-        bar.delegate = self
-        bar.barStyle = .default
-        bar.sizeToFit()
-        return bar
-    }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpSearchBar()
+        searchBar.delegate = self
         collectionView.keyboardDismissMode = .onDrag
         view.backgroundColor = .white
         let slideDown = UISwipeGestureRecognizer(target: self, action: #selector(dismissView(gesture:)))
         slideDown.direction = .down
         view.addGestureRecognizer(slideDown)
-    }
-    // MARK: - add ui elements methods
-   private func setUpSearchBar() {
-        view.addSubview(searchBar)
-        searchBar.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(35)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.height.equalTo(70)
-        }
     }
     @objc func dismissView(gesture: UISwipeGestureRecognizer) {
         searchBar.endEditing(true)
