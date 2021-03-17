@@ -10,7 +10,6 @@ protocol SearchManagerDelegate {
     func didSearch(_ searchManager : SearchManager, searchItems: Results)
     func didFailWithError (error: Error )
 }
-
 struct SearchManager  {
     var delegate : SearchManagerDelegate?
     
@@ -27,7 +26,6 @@ struct SearchManager  {
         let urlString = "http://itunes.apple.com/lookup?country=us&entity=song&id=\(collectionIdString)"
         performRequest(with: urlString)
         print(urlString)
-        
     }
     func performRequest(with urlString: String){
         // create url

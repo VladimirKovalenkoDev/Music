@@ -13,7 +13,7 @@ class BaseCollectionController: UIViewController {
     private var layout = UICollectionViewFlowLayout()
     public var results = [SearchItems]()
     public var searchManager = SearchManager()
-    public let spinner = UIActivityIndicatorView(style: .medium)
+    private let spinner = UIActivityIndicatorView(style: .medium)
     public lazy var navigation: UIView =  {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.9354471564, green: 0.9298860431, blue: 0.9397215843, alpha: 1)
@@ -45,7 +45,6 @@ class BaseCollectionController: UIViewController {
         configureCollectionView()
         setUpNavView()
         setUpSearchBar()
-        setUpLoadingView()
         view.backgroundColor = .white
     }
     // MARK: - setting up views methods,put constraints to the elements
@@ -66,7 +65,7 @@ class BaseCollectionController: UIViewController {
             make.bottom.equalToSuperview()
         }
     }
-    private func setUpLoadingView(){
+    public func setUpLoadingView(){
         view.addSubview(spinner)
         view.addSubview(loading)
         spinner.startAnimating()
@@ -75,7 +74,11 @@ class BaseCollectionController: UIViewController {
             make.top.equalTo(spinner.snp.bottom).offset(5)
             make.centerX.equalToSuperview()
         }
-        
+    }
+    private func removeLoading(){
+        spinner.stopAnimating()
+        spinner.removeFromSuperview()
+        loading.removeFromSuperview()
     }
     private func setUpSearchBar() {
          view.addSubview(searchBar)
@@ -164,11 +167,21 @@ extension BaseCollectionController: UICollectionViewDataSource,
 extension BaseCollectionController: SearchManagerDelegate {
     func didSearch(_ searchManager: SearchManager, searchItems: Results) {
         DispatchQueue.main.async {
+            self.removeLoading()
             self.results = searchItems.results
             self.collectionView.reloadData()
         }
     }
     func didFailWithError(error: Error) {
-        print(error)
+        DispatchQueue.main.async {
+            self.spinner.stopAnimating()
+            self.spinner.hidesWhenStopped = true
+            self.collectionView.removeFromSuperview()
+            let alertController = UIAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction) in}
+            alertController.addAction(cancel)
+            self.present(alertController, animated: true, completion: nil)
+            print(error)
+        }
     }
 }

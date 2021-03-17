@@ -35,5 +35,8 @@ extension SearchController: UISearchBarDelegate {
         newName.name = searchBar.text!
         history.append(newName)
         core.saveData()
+        DispatchQueue.main.async {
+            self.setUpLoadingView()
+        }
       }
 }

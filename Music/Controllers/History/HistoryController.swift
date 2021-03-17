@@ -51,6 +51,9 @@ extension HistoryController: UITableViewDataSource, UITableViewDelegate{
         let vc = AlbumsFromHistoryController()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .fullScreen
+        DispatchQueue.main.async {
+            vc.setUpLoadingView()
+        }
         vc.name = story[indexPath.row].name!
         present(vc, animated: true)
     }
