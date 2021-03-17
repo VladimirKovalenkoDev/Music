@@ -7,20 +7,9 @@
 
 import UIKit
 
-class AlbumController: UIViewController {
+class AlbumController: BaseController {
 // MARK: - UI elements declaration
     private let tableView = UITableView()
-    private lazy var navigation: UIView =  {
-        let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.9354471564, green: 0.9298860431, blue: 0.9397215843, alpha: 1)
-        return view
-    }()
-    private lazy var backButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "back"), for: .normal)
-        button.addTarget(self, action:  #selector(goBackPressed), for: .touchUpInside)
-        return button
-    }()
     // MARK: - properties
     public var name = ""
     public var album = ""
@@ -59,22 +48,11 @@ class AlbumController: UIViewController {
         }
     }
    private func setUpNavView(){
-        view.addSubview(navigation)
         navigation.addSubview(backButton)
-        navigation.snp.makeConstraints { (make) in
-            make.top.equalTo(view)
-            make.left.equalToSuperview().offset(0)
-            make.right.equalToSuperview().offset(0)
-            make.height.equalTo(88)
-        }
         backButton.snp.makeConstraints { (make) in
             make.top.equalTo(navigation).offset(55.57)
             make.left.equalTo(navigation).offset(10)
         }
-    }
-
-    @objc func goBackPressed(_ sender: UIButton!){
-        dismiss(animated: true, completion: nil)
     }
 }
 // MARK: - Table view delegate and data source methods

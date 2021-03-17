@@ -7,28 +7,17 @@
 
 import UIKit
 import CoreData
-class HistoryController: UIViewController {
+class HistoryController: BaseController {
     // MARK: - properties
     public var story = [History]()
     private var frame = CGRect()
     private let tableView = UITableView()
     private var core = Core()
-    private lazy var navigation: UIView =  {
-        let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.9354471564, green: 0.9298860431, blue: 0.9397215843, alpha: 1)
-        return view
-    }()
-    private lazy var navName: UILabel = {
-        let label = UILabel()
-        label.text = "History"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        return label
-    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setTableView()
-        setNavView()
+        navName.text = "History"
     }
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
@@ -45,20 +34,6 @@ class HistoryController: UIViewController {
         make.bottom.equalToSuperview()
     }
         story = core.loadLocalData()
-    }
-    private func setNavView(){
-        view.addSubview(navigation)
-        navigation.addSubview(navName)
-        navigation.snp.makeConstraints { (make) in
-            make.top.equalTo(view)
-            make.left.equalToSuperview().offset(0)
-            make.right.equalToSuperview().offset(0)
-            make.height.equalTo(88)
-        }
-        navName.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-10)
-        }
     }
 }
 // MARK: -  Table view delegate and data source methods

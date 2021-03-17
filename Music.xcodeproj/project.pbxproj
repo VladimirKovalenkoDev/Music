@@ -24,6 +24,7 @@
 		DDB286EA258F86B300358410 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB286E9258F86B300358410 /* SearchManager.swift */; };
 		DDE7CEC125FCEB070064FD56 /* BaseCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE7CEC025FCEB070064FD56 /* BaseCollectionController.swift */; };
 		DDE7CEC925FF70CF0064FD56 /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE7CEC825FF70CF0064FD56 /* Core.swift */; };
+		DDF8111C26026C6900DDEA00 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8111B26026C6900DDEA00 /* BaseController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		DDB286E9258F86B300358410 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		DDE7CEC025FCEB070064FD56 /* BaseCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionController.swift; sourceTree = "<group>"; };
 		DDE7CEC825FF70CF0064FD56 /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
+		DDF8111B26026C6900DDEA00 /* BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
 		F8B0E93C8D67781B26DC849F /* Pods-Music.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Music.debug.xcconfig"; path = "Target Support Files/Pods-Music/Pods-Music.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +84,7 @@
 		DD50FC0F25924243006FFD55 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				DDE7CEC025FCEB070064FD56 /* BaseCollectionController.swift */,
 				DD50FC2B2592977A006FFD55 /* AlbumsFromHistoryController.swift */,
 				DDB286C0258F778000358410 /* SearchController.swift */,
 				DD50FBF92590BD8B006FFD55 /* SearchListCell.swift */,
@@ -143,8 +146,8 @@
 		DDB286DC258F7EF900358410 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DDF8111B26026C6900DDEA00 /* BaseController.swift */,
 				DD50FBF22590B693006FFD55 /* TabBarController.swift */,
-				DDE7CEC025FCEB070064FD56 /* BaseCollectionController.swift */,
 				DD50FC1925924385006FFD55 /* Album */,
 				DD50FC0F25924243006FFD55 /* Search */,
 				DD50FC102592426C006FFD55 /* History */,
@@ -297,6 +300,7 @@
 				DDE7CEC125FCEB070064FD56 /* BaseCollectionController.swift in Sources */,
 				DDB286BD258F778000358410 /* AppDelegate.swift in Sources */,
 				DDB286BF258F778000358410 /* SceneDelegate.swift in Sources */,
+				DDF8111C26026C6900DDEA00 /* BaseController.swift in Sources */,
 				DD50FBF32590B693006FFD55 /* TabBarController.swift in Sources */,
 				DD50FC2C2592977A006FFD55 /* AlbumsFromHistoryController.swift in Sources */,
 				DD50FBF72590B7B7006FFD55 /* HistoryController.swift in Sources */,
