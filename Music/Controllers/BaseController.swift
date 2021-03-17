@@ -34,11 +34,18 @@ class BaseController: UIViewController {
         label.font = UIFont(name: "Roboto", size: 25)
         return label
     }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavView()
-    
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     private func setUpNavView(){
         view.addSubview(navigation)
@@ -56,6 +63,7 @@ class BaseController: UIViewController {
     }
     
     @objc func goBackPressed(_ sender: UIButton!){
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+        //dismiss(animated: true, completion: nil)
     }
 }

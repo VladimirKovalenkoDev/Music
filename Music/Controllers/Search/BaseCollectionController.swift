@@ -128,7 +128,8 @@ extension BaseCollectionController: UICollectionViewDataSource,
         if let contentRaiting = sortetdResults[indexPath.row].contentAdvisoryRating {
             vc.contentRaiting = contentRaiting
         }
-        present(vc, animated: true)
+        //present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 // MARK: -  Networking

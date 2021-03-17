@@ -22,6 +22,7 @@ class HistoryController: BaseController {
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
     }
+
    private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -56,7 +57,8 @@ extension HistoryController: UITableViewDataSource, UITableViewDelegate{
             vc.setUpLoadingView()
         }
         vc.name = story[indexPath.row].name!
-        present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+        //present(vc, animated: true)
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
             return true

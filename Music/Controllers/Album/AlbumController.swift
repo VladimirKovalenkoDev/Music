@@ -28,7 +28,14 @@ class AlbumController: BaseController {
         setUpNavView()
     }
     override func viewWillAppear(_ animated: Bool) {
-            self.searchManager.showMusic(collectionId: self.id)
+        super.viewWillAppear(animated)
+        self.searchManager.showMusic(collectionId: self.id)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     // MARK: - setting up views methods,put constraints to the elements
     private func setView() {
