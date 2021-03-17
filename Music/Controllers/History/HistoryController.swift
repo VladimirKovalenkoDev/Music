@@ -44,7 +44,6 @@ extension HistoryController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
-        
         cell.textLabel?.text = story[indexPath.row].name
         return cell
     }

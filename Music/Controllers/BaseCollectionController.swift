@@ -13,6 +13,7 @@ class BaseCollectionController: UIViewController {
     private var layout = UICollectionViewFlowLayout()
     public var results = [SearchItems]()
     public var searchManager = SearchManager()
+    public let spinner = UIActivityIndicatorView(style: .medium)
     public lazy var navigation: UIView =  {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.9354471564, green: 0.9298860431, blue: 0.9397215843, alpha: 1)
@@ -31,12 +32,20 @@ class BaseCollectionController: UIViewController {
         bar.sizeToFit()
         return bar
     }()
+    private lazy var loading: UILabel = {
+        let label = UILabel()
+        label.text = "Loading..."
+        label.textColor = .lightGray
+        label.font = UIFont(name: "Roboto", size: 25)
+        return label
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         searchManager.delegate = self
         configureCollectionView()
         setUpNavView()
         setUpSearchBar()
+        setUpLoadingView()
         view.backgroundColor = .white
     }
     // MARK: - setting up views methods,put constraints to the elements
@@ -56,6 +65,17 @@ class BaseCollectionController: UIViewController {
             make.right.equalToSuperview().offset(-20)
             make.bottom.equalToSuperview()
         }
+    }
+    private func setUpLoadingView(){
+        view.addSubview(spinner)
+        view.addSubview(loading)
+        spinner.startAnimating()
+        spinner.center = view.center
+        loading.snp.makeConstraints { (make) in
+            make.top.equalTo(spinner.snp.bottom).offset(5)
+            make.centerX.equalToSuperview()
+        }
+        
     }
     private func setUpSearchBar() {
          view.addSubview(searchBar)
