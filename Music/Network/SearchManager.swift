@@ -12,7 +12,6 @@ protocol SearchManagerDelegate {
 }
 struct SearchManager  {
     var delegate : SearchManagerDelegate?
-    
     func makeSearch(name: String){//method which performs a search albums
         if let data = name.data(using: .utf8){
             let encoded = data.map { String(format: "%%%02hhX", $0) }.joined()//coding text to right format
@@ -40,8 +39,6 @@ struct SearchManager  {
                      }
                      if let safeData = data {
                         if  let searchItems = self.parseJSON(safeData){
-                            
-                            
                            self.delegate?.didSearch(self , searchItems: searchItems)
                             
                         }

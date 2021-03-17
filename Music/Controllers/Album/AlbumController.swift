@@ -89,16 +89,13 @@ extension AlbumController: UITableViewDataSource,
              cell.advisoryRating.text = contentRaiting
              let artworkSting100 = coverUrl
              let artworkSting600 = artworkSting100.replacingOccurrences(of: "100x100", with: "600x600")
-             if let imageURL = URL(string: artworkSting600) {
-                       DispatchQueue.global(qos: .userInitiated).async {
-                           let contextOfUrl = try? Data(contentsOf: imageURL)
-                           DispatchQueue.main.async {
-                               if let imageData = contextOfUrl{
-                                   cell.cover.image = UIImage(data: imageData)
-                               }
-                           }
-                       }
-                   }
+            DispatchQueue.global(qos: .userInitiated).async {
+                if let imageURL = URL(string: artworkSting600) {
+                DispatchQueue.main.async {
+                    cell.cover.kf.setImage(with: imageURL)
+                }
+            }
+}
             return cell
         }else if indexPath.section == 1 { //AlbumCell must be after
             let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell",
