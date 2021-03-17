@@ -20,6 +20,7 @@ class SearchController: BaseCollectionController{
         let slideDown = UISwipeGestureRecognizer(target: self,
                                                  action: #selector(dismissView(gesture:)))
         slideDown.direction = .down
+        navName.text = "Search"
         view.addGestureRecognizer(slideDown)
     }
     @objc func dismissView(gesture: UISwipeGestureRecognizer) {

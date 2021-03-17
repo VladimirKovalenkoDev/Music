@@ -60,7 +60,7 @@ class AlbumController: UIViewController {
     }
    private func setUpNavView(){
         view.addSubview(navigation)
-        self.navigation.addSubview(backButton)
+        navigation.addSubview(backButton)
         navigation.snp.makeConstraints { (make) in
             make.top.equalTo(view)
             make.left.equalToSuperview().offset(0)

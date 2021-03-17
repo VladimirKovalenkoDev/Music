@@ -15,6 +15,7 @@ class AlbumsFromHistoryController: BaseCollectionController{
         setUpNavView()
         remakeView()
         searchManager.makeSearch(name:name)
+        navName.text = name
     }
     // MARK: - setting up view
    private func setUpNavView(){

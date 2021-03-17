@@ -36,7 +36,14 @@ class BaseCollectionController: UIViewController {
         let label = UILabel()
         label.text = "Loading..."
         label.textColor = .lightGray
+        label.textAlignment = .center
         label.font = UIFont(name: "Roboto", size: 25)
+        return label
+    }()
+    public lazy var navName: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         return label
     }()
     override func viewDidLoad() {
@@ -91,11 +98,16 @@ class BaseCollectionController: UIViewController {
      }
     private func setUpNavView(){
         view.addSubview(navigation)
+        navigation.addSubview(navName)
         navigation.snp.makeConstraints { (make) in
             make.top.equalTo(view)
             make.left.equalToSuperview().offset(0)
             make.right.equalToSuperview().offset(0)
             make.height.equalTo(88)
+        }
+        navName.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-10)
         }
     }
     @objc func goBackPressed(_ sender: UIButton!){
