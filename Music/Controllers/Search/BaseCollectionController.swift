@@ -78,7 +78,13 @@ extension BaseCollectionController: UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 180, height: 180)
+        let screenWidth = UIScreen.main.bounds.size.width
+        if screenWidth < 376 {
+            return CGSize(width: 160, height: 160)
+        } else {
+            return CGSize(width: 180, height: 180)
+        }
+        
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.results.count
