@@ -17,16 +17,18 @@ class HistoryController: BaseController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setTableView()
-        navName.text = "History"
+        
+        
     }
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
+        loadData()
+        navName.text = "History"
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-
    private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        view.addSubview(self.tableView)
+        view.addSubview(tableView)
         tableView.register(UITableViewCell.self,
                            forCellReuseIdentifier: "HistoryCell")
     tableView.snp.makeConstraints { (make) in
@@ -34,7 +36,22 @@ class HistoryController: BaseController {
         make.left.right.equalToSuperview()
         make.bottom.equalToSuperview()
     }
-        story = core.loadLocalData()
+    
+    }
+    private func loadData(){
+        core.fetchPlaces(name: "History") { [weak self] result in
+            guard let self = self else {return}
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let story):
+                    self.story = story!
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+
     }
 }
 // MARK: -  Table view delegate and data source methods
@@ -58,7 +75,6 @@ extension HistoryController: UITableViewDataSource, UITableViewDelegate{
         }
         vc.name = story[indexPath.row].name!
         navigationController?.pushViewController(vc, animated: true)
-        //present(vc, animated: true)
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
             return true

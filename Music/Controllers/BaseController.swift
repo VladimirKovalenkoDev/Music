@@ -64,6 +64,5 @@ class BaseController: UIViewController {
     
     @objc func goBackPressed(_ sender: UIButton!){
         navigationController?.popViewController(animated: true)
-        //dismiss(animated: true, completion: nil)
     }
 }

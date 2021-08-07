@@ -7,7 +7,6 @@
 
 import UIKit
 class TabBarController: UITabBarController {
-    #warning("Make great Navigation")
     override func viewDidLoad() {
         super.viewDidLoad()
         addTabBar()

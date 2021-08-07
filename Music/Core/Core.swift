@@ -20,23 +20,15 @@ class Core {
             }
         }
     }
-    #warning("make universal")
-    func loadLocalData() ->[History]{
-        let request: NSFetchRequest<History> = History.fetchRequest()
+    
+    func fetchPlaces(name: String,
+                     completion: @escaping (Result<[History]?, Error>) -> Void){
+        let all = NSFetchRequest<History>(entityName: name)
         do {
-            let history = try context.fetch(request)
-                history.forEach { story in
-                guard
-                    let title = story.name
-                else {
-                    fatalError("This was not supposed to happen")
-                }
-                print(title)
-            }
-            return history
-        }  catch {
-            fatalError("This was not supposed to happen")
+            let fetched = try context.fetch(all)
+            completion(.success(fetched))
+        } catch {
+            completion(.failure(error))
         }
     }
-    
 }
